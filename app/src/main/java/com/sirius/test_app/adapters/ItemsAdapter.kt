@@ -1,14 +1,15 @@
 package com.sirius.test_app.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sirius.test_app.databinding.*
-import com.sirius.test_app.loadImage
 import com.sirius.test_app.model.RcItem
 import com.sirius.test_app.utilities.ViewHolderBinder
+import com.sirius.test_app.utilities.setStars
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 class ItemsAdapter(private val scope: CoroutineScope): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -24,11 +25,11 @@ class ItemsAdapter(private val scope: CoroutineScope): RecyclerView.Adapter<Recy
             TYPE_DESCRIPTION ->
                 ViewHolderDescription(DescriptionViewBinding.inflate(inflater, parent, false))
             TYPE_TAGS ->
-                ViewHolderTags(TagHolderBinding.inflate(inflater, parent, false))
+                ViewHolderTags(RcHolderBinding.inflate(inflater, parent, false), parent.context)
             TYPE_HEADER ->
                 ViewHolderRatingsHeader(RatingsHeaderViewBinding.inflate(inflater, parent, false))
             TYPE_REVIEW ->
-                ViewHolderReview(ReviewViewBinding.inflate(inflater, parent, false))
+                ViewHolderReview(RcHolderBinding.inflate(inflater, parent, false), parent.context)
             else -> error("")
         }
     }
@@ -40,7 +41,7 @@ class ItemsAdapter(private val scope: CoroutineScope): RecyclerView.Adapter<Recy
         when (items[position]) {
             is RcItem.Description -> TYPE_DESCRIPTION
             is RcItem.RatingsHeader -> TYPE_HEADER
-            is RcItem.Review -> TYPE_REVIEW
+            is RcItem.Reviews -> TYPE_REVIEW
             is RcItem.Tags -> TYPE_TAGS
         }
 
@@ -62,6 +63,7 @@ class ItemsAdapter(private val scope: CoroutineScope): RecyclerView.Adapter<Recy
         private fun onBind(item: RcItem.RatingsHeader) = with(viewBinding) {
             rating.text = item.rating.toString()
             revCount.text = "${item.revCnt} reviews"
+            setStars(listOf(star1, star2, star3, star4, star5), item.rating)
         }
 
         override fun onBind(item: RcItem) {
@@ -69,10 +71,15 @@ class ItemsAdapter(private val scope: CoroutineScope): RecyclerView.Adapter<Recy
         }
     }
 
-    inner class ViewHolderTags(private val viewBinding: TagHolderBinding) :
+    inner class ViewHolderTags(private val viewBinding: RcHolderBinding, private val context: Context) :
         ViewHolderBinder<RcItem.Tags>(viewBinding) {
-        private fun onBind(item: RcItem.Tags) = with(viewBinding) {
 
+        private val tagsAdapter = TagsAdapter()
+
+        private fun onBind(item: RcItem.Tags) = with(viewBinding) {
+            recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.adapter = tagsAdapter
+            tagsAdapter.tags = item.names
         }
 
         override fun onBind(item: RcItem) {
@@ -80,19 +87,19 @@ class ItemsAdapter(private val scope: CoroutineScope): RecyclerView.Adapter<Recy
         }
     }
 
-    inner class ViewHolderReview(private val viewBinding: ReviewViewBinding) :
-        ViewHolderBinder<RcItem.Review>(viewBinding) {
-        private fun onBind(item: RcItem.Review) = with(viewBinding) {
-            name.text = item.data.userName
-            date.text = item.data.date
-            scope.launch {
-                loadImage(avatar, item.data.userImage)
-            }
-            review.text = item.data.message
+    inner class ViewHolderReview(private val viewBinding: RcHolderBinding, private val context: Context) :
+        ViewHolderBinder<RcItem.Reviews>(viewBinding) {
+
+        private val reviewsAdapter = ReviewsAdapter(scope)
+
+        private fun onBind(item: RcItem.Reviews) = with(viewBinding) {
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = reviewsAdapter
+            reviewsAdapter.reviews = item.data
         }
 
         override fun onBind(item: RcItem) {
-            onBind(item as RcItem.Review)
+            onBind(item as RcItem.Reviews)
         }
     }
 

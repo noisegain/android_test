@@ -1,4 +1,4 @@
-package com.sirius.test_app
+package com.sirius.test_app.utilities
 
 import android.widget.ImageView
 import coil.load
