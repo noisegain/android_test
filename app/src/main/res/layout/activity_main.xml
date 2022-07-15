@@ -55,6 +55,7 @@
         android:id="@+id/gameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/sk_modernist"
         android:textSize="22sp"
         android:layout_marginTop="12dp"
         android:text="Game"
@@ -69,7 +70,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toEndOf="@+id/gameLogo"
         app:layout_constraintTop_toBottomOf="@+id/gameTitle"
-        app:srcCompat="@android:drawable/star_big_off" />
+        app:srcCompat="@drawable/ic_star_off" />
 
     <ImageView
         android:id="@+id/star2"
@@ -77,7 +78,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toEndOf="@+id/star1"
         app:layout_constraintTop_toBottomOf="@+id/gameTitle"
-        app:srcCompat="@android:drawable/star_big_off" />
+        app:srcCompat="@drawable/ic_star_off" />
 
     <ImageView
         android:id="@+id/star3"
@@ -85,7 +86,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toEndOf="@+id/star2"
         app:layout_constraintTop_toBottomOf="@+id/gameTitle"
-        app:srcCompat="@android:drawable/star_big_off" />
+        app:srcCompat="@drawable/ic_star_off" />
 
     <ImageView
         android:id="@+id/star4"
@@ -93,7 +94,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toEndOf="@+id/star3"
         app:layout_constraintTop_toBottomOf="@+id/gameTitle"
-        app:srcCompat="@android:drawable/star_big_off" />
+        app:srcCompat="@drawable/ic_star_off" />
 
     <ImageView
         android:id="@+id/star5"
@@ -101,26 +102,29 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toEndOf="@+id/star4"
         app:layout_constraintTop_toBottomOf="@+id/gameTitle"
-        app:srcCompat="@android:drawable/star_big_off" />
+        app:srcCompat="@drawable/ic_star_off" />
 
     <TextView
         android:id="@+id/revCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:text="17M"
+        android:fontFamily="@font/sk_modernist"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/star5"
         app:layout_constraintStart_toEndOf="@+id/star5"
         app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
 
     <Button
         android:id="@+id/actionButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
         android:background="@drawable/rounded_corner"
         android:textColor="@color/black"
         android:text="AAAA"
+        android:fontFamily="@font/sk_modernist"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

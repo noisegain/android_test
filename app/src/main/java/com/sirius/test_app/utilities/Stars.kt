@@ -1,11 +1,11 @@
 package com.sirius.test_app.utilities
 
 import android.widget.ImageView
+import com.sirius.test_app.R
+import kotlin.math.round
 
 fun setStars(stars: List<ImageView>, rating: Float) {
-    for (i in stars.indices) {
-        if (rating >= i + 1) {
-            stars[i].setImageResource(android.R.drawable.star_big_on)
-        }
+    for (i in 0 until minOf(round(rating).toInt(), stars.size)) {
+        stars[i].setImageResource(R.drawable.ic_star_on)
     }
 }

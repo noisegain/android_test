@@ -7,8 +7,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/avatar"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
@@ -24,6 +24,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Пономаренко Илья"
+                android:fontFamily="@font/sk_modernist"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/avatar"
@@ -35,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="8dp"
-                android:text="11 класс"
+                android:text="18 april 2022"
+                android:fontFamily="@font/sk_modernist"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/name"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -49,6 +51,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="something"
+                android:fontFamily="@font/sk_modernist"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
